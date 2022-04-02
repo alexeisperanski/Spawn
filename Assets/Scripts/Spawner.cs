@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Spawn : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private GameObject _enemy;
+    [SerializeField] private Enemy _enemy;
     [SerializeField] private float _waintTimeForSpawn = 2f;
 
     private Coroutine _spawn;
@@ -28,9 +28,9 @@ public class Spawn : MonoBehaviour
         {
             foreach (Transform spawnPoint in _spawnPoints)
             {
-                GameObject newEnemy = Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
+                Enemy newEnemy = Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
                 yield return waitForSeconds;
-                Destroy(newEnemy);
+                Destroy(newEnemy.gameObject);
             }
         }
     }
